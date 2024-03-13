@@ -1,4 +1,4 @@
-CPATH='.:/lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
+CPATH='.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
 
 rm -rf student-submission
 rm -rf grading-area
@@ -22,7 +22,7 @@ cp -r lib grading-area
 
 cd grading-area
 
-javac -cp $CPATH *.java 2> tmp
+javac -cp $CPATH *.java
 if [ $? -ne 0 ]
 then
     echo "Compilation Error"
@@ -30,7 +30,7 @@ then
     exit
 fi
 
-java -cp $CPATH org.junit.runner.JUnitCore *.java > Grade.txt
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > Grade.txt
 
 lastline=$(cat Grade.txt | tail -n 2 | head -n 1)
 tests=$(echo $lastline | awk -F'[, ]' '{print $3}')
